@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal_Finance_Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login/Register Page -->
+    <div id="authPage" class="page">
+        <div class="container">
+            <h1>Personal Finance Tracker</h1>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="form-box">
+                <h2>Login</h2>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button onclick="login()">Login</button>
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="form-box hidden">
+                <h2>Register</h2>
+                <input type="text" id="regName" placeholder="Full Name" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="password" id="regPassword" placeholder="Password (min 8 characters)" required>
+                <button onclick="register()">Register</button>
+                <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Page -->
+    <div id="appPage" class="page hidden">
+        <div class="header">
+            <h1>Finance Tracker</h1>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="tab-btn" onclick="showTab('expenses')">Expenses</button>
+            <button class="tab-btn" onclick="showTab('income')">Income</button>
+            <button class="tab-btn" onclick="showTab('budget')">Budget</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <h2>Dashboard</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Income</h3>
+                    <p id="totalIncome">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Expenses</h3>
+                    <p id="totalExpenses">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Balance</h3>
+                    <p id="balance">₹0</p>
+                </div>
+            </div>
+
+            <h3>Recent Transactions</h3>
+            <div id="recentTransactions" class="transaction-list"></div>
+        </div>
+
+        <!-- Expenses Tab -->
+        <div id="expenses" class="tab-content">
+            <h2>Manage Expenses</h2>
+            
+            <div class="add-form">
+                <h3>Add New Expense</h3>
+                <input type="number" id="expenseAmount" placeholder="Amount" required>
+                <select id="expenseCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="dining">Dining Out</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="date" id="expenseDate" required>
+                <input type="text" id="expenseDesc" placeholder="Description (optional)">
+                <button onclick="addExpense()">Add Expense</button>
+            </div>
+
+            <h3>All Expenses</h3>
+            <input type="text" id="searchExpense" placeholder="Search..." onkeyup="searchExpenses()">
+            <select id="filterCategory" onchange="filterExpenses()">
+                <option value="">All Categories</option>
+                <option value="groceries">Groceries</option>
+                <option value="utilities">Utilities</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="transportation">Transportation</option>
+                <option value="dining">Dining Out</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="shopping">Shopping</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="expenseList" class="transaction-list"></div>
+        </div>
+
+        <!-- Income Tab -->
+        <div id="income" class="tab-content">
+            <h2>Manage Income</h2>
+            
+            <div class="add-form">
+                <h3>Add Income Source</h3>
+                <input type="text" id="incomeSource" placeholder="Source (e.g., Salary)" required>
+                <input type="number" id="incomeAmount" placeholder="Amount" required>
+                <select id="incomeFrequency" required>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="biweekly">Bi-weekly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="one-time">One-time</option>
+                </select>
+                <input type="date" id="incomeDate" required>
+                <button onclick="addIncome()">Add Income</button>
+            </div>
+
+            <h3>Income Sources</h3>
+            <div id="incomeList" class="transaction-list"></div>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content">
+            <h2>Manage Budget</h2>
+            
+            <div class="add-form">
+                <h3>Set Budget</h3>
+                <select id="budgetCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="dining">Dining Out</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="number" id="budgetAmount" placeholder="Monthly Budget Amount" required>
+                <button onclick="setBudget()">Set Budget</button>
+            </div>
+
+            <h3>Budget Overview</h3>
+            <div id="budgetList" class="budget-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
