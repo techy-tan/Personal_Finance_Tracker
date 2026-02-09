@@ -1,4 +1,5 @@
 // Store data in localStorage
+// JS CODE
 let currentUser = null;
 let expenses = [];
 let incomes = [];

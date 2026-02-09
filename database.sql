@@ -1,5 +1,5 @@
 -- Simple Database Schema for Personal Finance Tracker
-
+-- Database code
 -- Create Database
 CREATE DATABASE finance_tracker;
 USE finance_tracker;
